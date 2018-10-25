@@ -47,33 +47,39 @@ startBtn.addEventListener("click", (e) =>{
 const phrases = [
               "guess",                        //[0]
               "change",                       //[1]
-              "querySelectorAll",             //[2]
-              "querySelector",                //[3]
+              "query Selector All",             //[2]
+              "query Selector",                //[3]
               "Escaping special characters"   //[4]
 
 ];
-let results = [];
-let randomStrings = [];
+// let results = [];
+// let randomStrings = [];
 
 //==============================================================================
 
-function getRandomPhraseAsArray(arr, count ){
- while (arr.length > 0){
-  results.push(arr.splice(0, count));
- }
-  return results;
-};
-// Splits one array phrases = into 5 multiple subarrays
-getRandomPhraseAsArray(phrases, 1);
+// function getRandomPhraseAsArray(arr, count ){
+//  while (arr.length > 0){
+//   results.push(arr.splice(0, count));
+//  }
+//   return results;
+// };
+// // Splits one array phrases = into 5 multiple subarrays
+// getRandomPhraseAsArray(phrases, 1);
 
-function strings(arr){
-  //randomly pick on of the phrases
-  arr = results[Math.floor(Math.random()*results.length)];
-  // converts random phrase into strings and than into array objects
-  randomStrings = JSON.stringify(arr).split("");
-  return randomStrings; 
-}
+// function strings(arr){
+//   // randomly pick on of the phrases
+//   arr = results[Math.floor(Math.random()*results.length)];
+//   // converts random phrase into strings and than into array objects
+//   randomStrings = JSON.stringify(arr).split("");
+  
+//   return randomStrings; 
+// }
+
 //======================================================================
+function getRandomPhraseAsArray (arr) {
+  const randomNumber = Math.floor(Math.random() * arr.length);
+  return arr[randomNumber].split("");
+}
 
 function addPhraseToDisplay(arr) {
   for (let i = 0; i < arr.length; i++) {
@@ -89,10 +95,8 @@ function addPhraseToDisplay(arr) {
     }
   }
   }
-
-let phraseArray = strings(randomStrings);
+const phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray);
-//======================================================================
 
 function checkLetter(e) {
   let discover = null;
@@ -106,7 +110,7 @@ function checkLetter(e) {
 }
 //======================================================================
 btnKeyboard.addEventListener('click', (e) => {
-  if (discover = true) {
+  if (e.target.tagName === "BUTTON") {
     e.target.classList.add("chosen");
     e.target.setAttribute("disabled", true);
     const letterFound = checkLetter(e);
